@@ -1,13 +1,14 @@
-async function dininghalls() {
-  const request = await fetch('/api/dining');
-  const diningdata = await request.json();
-
+async function dining() {
+  const requestdata = await fetch("/api/dining");
+  const diningdata = await requestdata.json();
   console.log(diningdata);
+  console.table(diningdata);
+}
 
-  const target = document.querySelector('#target');
+/*
   diningdata.forEach((item) => {
     const appendItem = document.createElement('div');
-    appendItem.classList.add('title','has-text-centered','is-parent','is-3');
+    appendItem.classList.add('title', 'has-text-centered', 'is-parent', 'is-3');
     appendItem.innerHTML = `
       <article class="title is-child box has-background-link-dark" >
       <span class ="subtitle has-text-light has-text-weight-bold">
@@ -19,17 +20,13 @@ async function dininghalls() {
         <br/>
         <span class ="has-text-light">
           ${item.hall_address.split(',')[1]}
+        </span>
+        </article>`;
+    targetBox.append(appendItem);
     
-    
-    
-    
-    `
 
-
-
-
-
-
+    TEACHER WAY ABOVE
+    const target = document.querySelector('#target');
     const {mealID} = item;
     const {calories} = item;
     const {carbs} = item;
@@ -49,12 +46,14 @@ async function dininghalls() {
           <td>${Chloesterol}</td>
       </tr>
   `;
+  
   });
 }
-
+*/
 async function windowActions() {
   console.log('loaded window');
-  const data = await dininghalls();
+  const data = await dining();
+  console.table(data);
 }
 
 window.onload = windowActions;
