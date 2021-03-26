@@ -7,8 +7,8 @@ async function dining() {
   const targettable = document.querySelector('.tbody');
 
   arraydata.forEach((element) => {
-    console.log(element.dining);
-    console.log(element.hall_address);
+    console.log(element.macro_id);
+    console.log(element.hall.name_id);
     const appendelement = document.createElement('tr');
     const target = document.querySelector('#target');
     const {mealID} = element.macro_id;
