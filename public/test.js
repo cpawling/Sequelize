@@ -1,19 +1,43 @@
-async function dininghalls(){
-  const request = await fetch('/api/macros')
-  const data = request.json();
+async function dininghalls() {
+  const request = await fetch('/api/dining');
+  const diningdata = await request.json();
+
+  console.log(diningdata);
+
+  const target = document.querySelector('#target');
+  diningdata.forEach((item) => {
+    const appendItem = document.createElement('div');
+    appendItem.classList.add('title','has-text-centered','is-parent','is-3');
+    appendItem.innerHTML = `
+      <article class="title is-child box has-background-link-dark" >
+      <span class ="subtitle has-text-light has-text-weight-bold">
+          ${item.hall_name}</span>
+        <br />
+        <span class "has-text-light">
+          ${item.hall_address.split(',')[0]}
+        </span>
+        <br/>
+        <span class ="has-text-light">
+          ${item.hall_address.split(',')[1]}
+    
+    
+    
+    
+    `
 
 
-const diningdata = data;
-const target = document.querySelector('#target');
-diningdata.forEach((item) => {
-  const mealID = item.mealID;
-  const calories = item.calories;
-  const carbs = item.carbs;
-  const sodium = item.sodium;
-  const protein = item.protein;
-  const fat = item.fat;
-  const chloresterol = item.chloresterol;
-  return `
+
+
+
+
+    const {mealID} = item;
+    const {calories} = item;
+    const {carbs} = item;
+    const {sodium} = item;
+    const {protein} = item;
+    const {fat} = item;
+    const {chloresterol} = item;
+    return `
         <tr>
           <th>${MealID}</th>
           <td>${Name}</td>
@@ -25,7 +49,12 @@ diningdata.forEach((item) => {
           <td>${Chloesterol}</td>
       </tr>
   `;
-});
+  });
 }
 
-dininghalls()
+async function windowActions() {
+  console.log('loaded window');
+  const data = await dininghalls();
+}
+
+window.onload = windowActions;
