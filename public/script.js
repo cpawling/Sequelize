@@ -1,55 +1,39 @@
 async function dining() {
-  const requestdata = await fetch("/api/dining");
+  const requestdata = await fetch('/api/macros');
   const diningdata = await requestdata.json();
-  console.log(diningdata);
+  const arraydata = diningdata.data;
+  console.log(arraydata);
   console.table(diningdata);
-}
+  const targettable = document.querySelector('.tbody');
 
-/*
-  diningdata.forEach((item) => {
-    const appendItem = document.createElement('div');
-    appendItem.classList.add('title', 'has-text-centered', 'is-parent', 'is-3');
-    appendItem.innerHTML = `
-      <article class="title is-child box has-background-link-dark" >
-      <span class ="subtitle has-text-light has-text-weight-bold">
-          ${item.hall_name}</span>
-        <br />
-        <span class "has-text-light">
-          ${item.hall_address.split(',')[0]}
-        </span>
-        <br/>
-        <span class ="has-text-light">
-          ${item.hall_address.split(',')[1]}
-        </span>
-        </article>`;
-    targetBox.append(appendItem);
-    
-
-    TEACHER WAY ABOVE
+  arraydata.forEach((element) => {
+    console.log(element.dining);
+    console.log(element.hall_address);
+    const appendelement = document.createElement('tr');
     const target = document.querySelector('#target');
-    const {mealID} = item;
-    const {calories} = item;
-    const {carbs} = item;
-    const {sodium} = item;
-    const {protein} = item;
-    const {fat} = item;
-    const {chloresterol} = item;
-    return `
-        <tr>
-          <th>${MealID}</th>
-          <td>${Name}</td>
-          <td>${Calories}</td>
-          <td>${Carbs}</td>
-          <td>${Sodium}</td>
-          <td>${Protein}</td>
-          <td>${Fat}</td>
-          <td>${Chloesterol}</td>
+    const {mealID} = element.macro_id;
+    const {calories} = element.calories;
+    const {carbs} = element.carbs;
+    const {sodium} = element.sodium;
+    const {protein} = element.protein;
+    const {fat} = element.fat;
+    const {chloresterol} = element.cholesterol;
+    const {name} = element.meal_id;
+    appendelement.innerHTML = `
+          <td>${mealID}</td>
+          <td>${name}</td>
+          <td>${calories}</td>
+          <td>${carbs}</td>
+          <td>${sodium}</td>
+          <td>${protein}</td>
+          <td>${fat}</td>
+          <td>${chloresterol}</td>
       </tr>
   `;
-  
+    targettable.append(appendelement);
   });
 }
-*/
+
 async function windowActions() {
   console.log('loaded window');
   const data = await dining();
@@ -57,3 +41,7 @@ async function windowActions() {
 }
 
 window.onload = windowActions;
+
+/*
+"macro_id":1,"calories":218,"serving_size":20,"cholesterol":544,"sodium":206,"carbs":1,"protein":17,"meal_id":1,"fat":16},
+*/
