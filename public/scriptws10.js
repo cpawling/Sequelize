@@ -16,8 +16,7 @@ async function dining() {
   const targettable = document.querySelector('.table');
 
   arraydata.forEach((element) => {
-    console.log(element.dining);
-    console.log(element.hall_address);
+    console.log(element);
     const appendelement = document.createElement('tr');
     const {mealID} = element.macro_id;
     const {calories} = element.calories;
