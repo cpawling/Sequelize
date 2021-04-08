@@ -228,26 +228,4 @@ router.get('/custom', async (req, res) => {
   }
 });
 
-
-/// NEW TABLE API ENDPOINT ///
-router.get("/macroChart", async (req, res) => {
-  try {
-      const meals = await db.Meals.findAll();
-      const macros = await db.Macros.findAll();
-      const mealTable = meals.map(meal => {
-        const macrosForMeal = macros.find(macro => macro.meal_id === meal.meal_id)
-        return {
-          id: meal.meal_id,
-          name: meal.meal_name,
-          sodium: macrosForMeal.sodium
-          .... etc
-        }
-      })
-      res.json(mealTable);
-  } catch (err) {
-    console.error(err);
-    res.error("Server error");
-  }
-});
-
 export default router;
