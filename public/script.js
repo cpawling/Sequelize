@@ -27,3 +27,13 @@ async function windowActions() {
 }
 
 window.onload = windowActions;
+
+
+  /*
+  const requestdata = await fetch('/api/meals');
+  const mealdata = await requestdata.json();
+  const arraydata = mealdata.data;
+  console.log(arraydata);
+  console.table(mealdata);
+  const targettable = document.querySelector('.table');
+*/

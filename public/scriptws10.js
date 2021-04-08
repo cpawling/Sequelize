@@ -1,14 +1,6 @@
 async function dining() {
-  /*
-  const requestdata = await fetch('/api/meals');
-  const mealdata = await requestdata.json();
-  const arraydata = mealdata.data;
-  console.log(arraydata);
-  console.table(mealdata);
-  const targettable = document.querySelector('.table');
-*/
-  const requestmacrodata = await fetch('/api/macros');
-  const macrodata = await requestmacrodata.json();
+  const requestdata = await fetch('/api/macros');
+  const macrodata = await requestdata.json();
   const arraydata = macrodata.data;
   console.log(arraydata);
   console.table(macrodata);
@@ -37,7 +29,6 @@ async function dining() {
           <td>${chloresterol}</td>
       </tr>
   `;
-  
     targettable.append(appendelement);
   });
 }
