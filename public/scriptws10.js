@@ -11,8 +11,8 @@ async function dining() {
   const requestmacrodata = await fetch('/api/macros');
   const macrodata = await requestmacrodata.json();
   const arraydata = macrodata.data;
-  console.log(arraydata2);
-  console.table(mealdata);
+  console.log(arraydata);
+  console.table(macrodata);
   const targettable = document.querySelector('.table');
 
   arraydata.forEach((element) => {
