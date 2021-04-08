@@ -10,7 +10,7 @@ async function dining() {
 
   const requestmacrodata = await fetch('/api/macros');
   const macrodata = await requestmacrodata.json();
-  const arraydata2 = macrodata.data;
+  const arraydata = macrodata.data;
   console.log(arraydata2);
   console.table(mealdata);
   const targettable = document.querySelector('.table');
