@@ -4,7 +4,7 @@ async function dining() {
   const arraydata = diningdata.data;
   console.log(arraydata);
   console.table(diningdata);
-  const targettable = document.querySelector('.table');
+  const targettable = document.querySelector('.tbody');
 
   arraydata.forEach((element) => {
     console.log(element.dining);
