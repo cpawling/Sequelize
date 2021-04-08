@@ -16,8 +16,10 @@ async function dining() {
   const targettable = document.querySelector('.table');
 
   arraydata.forEach((element) => {
-    console.log(element);
+    console.log(element.dining);
+    console.log(element.hall_address);
     const appendelement = document.createElement('tr');
+    const target = document.querySelector('#target');
     const {mealID} = element.macro_id;
     const {calories} = element.calories;
     const {carbs} = element.carbs;
@@ -35,11 +37,11 @@ async function dining() {
           <td>${protein}</td>
           <td>${fat}</td>
           <td>${chloresterol}</td>
-    </tr>
-        `;
-          
+      </tr>
+  `;
+  
     targettable.append(appendelement);
-    });
+  });
 }
 
 
