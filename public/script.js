@@ -1,9 +1,9 @@
 async function dining() {
-  const requestdata = await fetch('/api/dining');
-  const diningdata = await requestdata.json();
-  const arraydata = diningdata.data;
+  const requestdata = await fetch('/api/meals');
+  const mealdata = await requestdata.json();
+  const arraydata = mealdata.data;
   console.log(arraydata);
-  console.table(diningdata);
+  console.table(mealdata);
   const targettable = document.querySelector('.table');
 
   arraydata.forEach((element) => {
