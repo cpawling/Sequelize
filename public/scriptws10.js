@@ -10,23 +10,15 @@ async function dining() {
     console.log(element.macro_id);
     console.log(element.meal_id);
     const appendelement = document.createElement('tr');
-    const {mealID} = element.macro_id;
-    const {calories} = element.calories;
-    const {carbs} = element.carbs;
-    const {sodium} = element.sodium;
-    const {protein} = element.protein;
-    const {fat} = element.fat;
-    const {chloresterol} = element.cholesterol;
-    const {name} = element.meal_id;
     appendelement.innerHTML = `
-          <td>${mealID}</td>
-          <td>${name}</td>
-          <td>${calories}</td>
-          <td>${carbs}</td>
-          <td>${sodium}</td>
-          <td>${protein}</td>
-          <td>${fat}</td>
-          <td>${chloresterol}</td>
+          <td>${element.macro_id}</td>
+          <td>${element.meal_id}</td>
+          <td>${element.calories}</td>
+          <td>${element.carbs}</td>
+          <td>${element.sodium}</td>
+          <td>${element.protein}</td>
+          <td>${element.fat}</td>
+          <td>${element.cholesterol}</td>
       </tr>
   `;
     targettable.append(appendelement);
