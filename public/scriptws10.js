@@ -19,7 +19,6 @@ async function dining() {
     console.log(element.dining);
     console.log(element.hall_address);
     const appendelement = document.createElement('tr');
-    const target = document.querySelector('#target');
     const {mealID} = element.macro_id;
     const {calories} = element.calories;
     const {carbs} = element.carbs;
