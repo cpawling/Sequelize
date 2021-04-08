@@ -5,7 +5,7 @@ async function dining() {
   const arraydata = mealdata.data;
   console.log(arraydata);
   console.table(mealdata);
-  const targettable  = document.querySelector('.table');
+  const targettable = document.querySelector('.table');
 */
 
   const requestmacrodata = await fetch('/api/macros');
@@ -36,11 +36,13 @@ async function dining() {
           <td>${protein}</td>
           <td>${fat}</td>
           <td>${chloresterol}</td>
-      </tr>
-  `;
+    </tr>
+        `;
+          
     targettable.append(appendelement);
-  });
+    });
 }
+
 
 async function windowActions() {
   console.log('loaded window');
