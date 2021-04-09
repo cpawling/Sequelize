@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 /* import Macros from '../models/Macros'; */
-
 async function macromeals() {
   const requestdata = await fetch('/api/wholeMeal');
   const macrodata = await requestdata.json();
@@ -8,8 +7,6 @@ async function macromeals() {
   const targettable = document.querySelector('.w10');
 
   arraydata.forEach((element) => {
-    console.log(element.macro_id);
-    console.log(element.meal_id);
     const appendelement = document.createElement('tr');
     appendelement.innerHTML = `
           <td>${element.macro_id}</td>
@@ -26,23 +23,25 @@ async function macromeals() {
   });
 }
 
-function getRandomnumb(max) {
+function getRandomnumbers(max) {
+  // Get Random Numbers, syntaxed like Python //
   return Math.floor(Math.random() * max);
 }
 
-function getrandommeals(data) {
-  const random_meal = [];
-  // eslint-disable-next-line no-plusplus
+function getrandommeals(meal_name) {
+  const random_meals = [];
+  // Random Number Generator syntaex like python//
   for (i = 0; i < 10; i++) {
-    const current_random_meal = getRandomnumb(data.length - 1);
-    random_meal.push(data[current_random_meal]);
-    data.splice(current_random_meal, 1);
+    const current_random_meal = getRandomnumbers(meal_name.length - 1);
+    random_meals.push(meal_name[current_random_meal]);
+    meal_name.splice(current_random_meal, 1);
   }
-  return random_meal;
+  return random_meals;
 }
 
 async function dataMacros() {
-  const request = await fetch('/api/wholeMeals');
+  const request = await fetch('/api/macros');
+  /// Attempted with wholeMeals, my random number generator didnt like it so I went back to just using two /// 
   const api_whole = await request.json();
   const {data} = api_whole;
   const macro_meal_data = [
@@ -90,26 +89,33 @@ async function dataMacros() {
       dataPoints: []
     }
   ];
-  console.log(macro_data);
-  const random_meals = getrandommeals(api_macro);
-  for (i = 0; i < random_meals.length; i++) {
-    element = random_meals[i];
+  console.log(macro_meal_data[0]);
+  const randommeallist = getrandommeals(api_whole);
 
-    console.log(meal_data);
+  // looping through the data
+  for (i = 0; i < randommeallist.length; i++) {
+    element = randommeallist[i];
 
-    macro_meal_data[0].dataPoints.push({ label: element.meal_name, y: element.calories });
-    macro_meal_data[1].dataPoints.push({ label: element.meal_name, y: element.serving_size });
-    macro_meal_data[2].dataPoints.push({ label: element.meal_name, y: element.cholesterol });
-    macro_meal_data[3].dataPoints.push({ label: element.meal_name, y: element.sodium });
-    macro_meal_data[4].dataPoints.push({ label: element.meal_name, y: element.carbs });
-    macro_meal_data[5].dataPoints.push({ label: element.meal_name, y: element.protein });
-    macro_meal_data[6].dataPoints.push({ label: element.meal_name, y: element.fat });
+    const name_request = await fetch(`/api/meals/${element.meal_id}`);
+
+    // getting .json values from api data
+    const name_data_meal = await name_request.json();
+
+    console.log(name_data_meal);
+
+    macro_meal_data[0].dataPoints.push({ label: name_data_meal[0].meal_name, y: element.calories });
+    macro_meal_data[1].dataPoints.push({ label: name_data_meal[0].meal_name, y: element.serving_size });
+    macro_meal_data[2].dataPoints.push({ label: name_data_meal[0].meal_name, y: element.cholesterol });
+    macro_meal_data[3].dataPoints.push({ label: name_data_meal[0].meal_name, y: element.sodium });
+    macro_meal_data[4].dataPoints.push({ label: name_data_meal[0].meal_name, y: element.carbs });
+    macro_meal_data[5].dataPoints.push({ label: name_data_meal[0].meal_name, y: element.protein });
+    macro_meal_data[6].dataPoints.push({ label: name_data_meal[0].meal_name, y: element.fat });
   }
 
   const chart = new CanvasJS.Chart('chartContainer',
     {
       title: {
-        text: 'Meal Macro Information'
+        text: 'Meal Macro Information for WS10'
       },
 
       data: macro_meal_data
@@ -122,6 +128,7 @@ async function dataMacros() {
 async function windowActions() {
   console.log('loaded window');
   const data = await macromeals();
+  await dataMacros();
   console.table(data);
 }
 
