@@ -1,4 +1,5 @@
-/*import Macros from '../models/Macros'; */
+/* eslint-disable camelcase */
+/* import Macros from '../models/Macros'; */
 
 async function macromeals() {
   const requestdata = await fetch('/api/wholeMeal');
@@ -33,6 +34,7 @@ function getRandomnumb(max) {
 
 function getrandommeals(data) {
   const random_meal = [];
+  // eslint-disable-next-line no-plusplus
   for (i = 0; i < 10; i++) {
     const current_random_meal = getRandomnumb(data.length - 1);
     random_meal.push(data[current_random_meal]);
@@ -41,11 +43,8 @@ function getrandommeals(data) {
   return random_meal;
 }
 
-
-
-async mealddataponts(macros){
-
-    macro_meal_data.dataPoints.push({label: meal_data.meal_name, y: element.macros});
+async function mealddataponts(macros) {
+  macro_meal_data.dataPoints.push({label: meal_data.meal_name, y: element.macros});
 }
 
 async function dataMacros() {
@@ -58,7 +57,7 @@ async function dataMacros() {
       name: 'Calories',
       showInLegend: 'true',
       dataPoints: mealddataponts(calories)
-        },
+    },
 
     {
       type: 'stackedBar',
@@ -99,14 +98,28 @@ async function dataMacros() {
   ];
 
   const random_meals = getrandommeals(api_macro);
+  // eslint-disable-next-line no-plusplus
   for (i = 0; i < random_meal_list.length; i++) {
     element = random_meals[i];
 
     const mealname_request = await fetch(`/api/meals/${element.meal_id}`);
+    // eslint-disable-next-line no-await-in-loop
     const meal_data = await mealname_request.json();
 
     console.log(meal_data);
-  };
+  }
+
+  const chart = new CanvasJS.Chart('chartContainer',
+    {
+      title: {
+        text: 'Meal Macro Information'
+      },
+
+      data: macro_data
+
+    });
+
+  chart.render();
 }
 
 async function windowActions() {
