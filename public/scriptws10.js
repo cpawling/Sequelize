@@ -5,8 +5,6 @@ async function macromeals() {
   const requestdata = await fetch('/api/wholeMeal');
   const macrodata = await requestdata.json();
   const arraydata = macrodata.data;
-  console.log(arraydata);
-  console.table(macrodata);
   const targettable = document.querySelector('.w10');
 
   arraydata.forEach((element) => {
@@ -43,39 +41,35 @@ function getrandommeals(data) {
   return random_meal;
 }
 
-async function mealddataponts(macros) {
-  macro_meal_data.dataPoints.push({label: meal_data.meal_name, y: element.macros});
-}
-
 async function dataMacros() {
   const request = await fetch('/api/wholeMeals');
-  const api_macro = await request.json();
-  const {data} = api_macro;
+  const api_whole = await request.json();
+  const {data} = api_whole;
   const macro_meal_data = [
     {
       type: 'stackedBar',
       name: 'Calories',
       showInLegend: 'true',
-      dataPoints: mealddataponts(calories)
+      dataPoints: []
     },
 
     {
       type: 'stackedBar',
       name: 'Serving Size',
       showInLegend: 'true',
-      dataPoints: mealddataponts(serving_size)
+      dataPoints: []
     },
     {
       type: 'stackedBar',
       name: 'Cholesterol',
       showInLegend: 'true',
-      dataPoints: mealddataponts(cholesterol)
+      dataPoints: []
     },
     {
       type: 'stackedBar',
       name: 'Sodium',
       showInLegend: 'true',
-      dataPoints: mealddataponts(calories)
+      dataPoints: []
     },
     {
       type: 'stackedBar',
@@ -96,17 +90,20 @@ async function dataMacros() {
       dataPoints: []
     }
   ];
-
+  console.log(macro_data);
   const random_meals = getrandommeals(api_macro);
-  // eslint-disable-next-line no-plusplus
-  for (i = 0; i < random_meal_list.length; i++) {
+  for (i = 0; i < random_meals.length; i++) {
     element = random_meals[i];
 
-    const mealname_request = await fetch(`/api/meals/${element.meal_id}`);
-    // eslint-disable-next-line no-await-in-loop
-    const meal_data = await mealname_request.json();
-
     console.log(meal_data);
+
+    macro_meal_data[0].dataPoints.push({ label: element.meal_name, y: element.calories });
+    macro_meal_data[1].dataPoints.push({ label: element.meal_name, y: element.serving_size });
+    macro_meal_data[2].dataPoints.push({ label: element.meal_name, y: element.cholesterol });
+    macro_meal_data[3].dataPoints.push({ label: element.meal_name, y: element.sodium });
+    macro_meal_data[4].dataPoints.push({ label: element.meal_name, y: element.carbs });
+    macro_meal_data[5].dataPoints.push({ label: element.meal_name, y: element.protein });
+    macro_meal_data[6].dataPoints.push({ label: element.meal_name, y: element.fat });
   }
 
   const chart = new CanvasJS.Chart('chartContainer',
@@ -115,7 +112,7 @@ async function dataMacros() {
         text: 'Meal Macro Information'
       },
 
-      data: macro_data
+      data: macro_meal_data
 
     });
 
