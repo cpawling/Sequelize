@@ -212,6 +212,27 @@ router.get('/restrictions/:restriction_id', async (req, res) => {
   }
 });
 
+router.get('/wholeMeals', async (req,res) => {
+  try {
+    const meals = await db.meals.findAll();
+    const macros = await db.macros.findAll();
+    const wholeMeals = meals.map((meal) => {
+      const macroEntry = macros.find((macro) => macro.meal_id === meal.meal_id);
+      console.log('meal', meal.dataValues);
+      console.log('macroEntry', macroEntry.dataValues);
+      return {
+        ...meal.dataValues,
+        ...macroEntry.dataValues
+      };
+    });
+    res.json({data:wholeMeals});
+  } catch (err) {
+    console.error(err);
+    gi;
+    res.error('Whole Meals Server error');
+  }
+});
+
 /// /////////////////////////////////
 /// //////Custom SQL Endpoint////////
 /// /////////////////////////////////
