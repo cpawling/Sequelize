@@ -6,7 +6,7 @@ async function macromeals() {
   const arraydata = macrodata.data;
   console.log(arraydata);
   console.table(macrodata);
-  const targettable = document.querySelector('.table');
+  const targettable = document.querySelector('.w10');
 
   arraydata.forEach((element) => {
     console.log(element.macro_id);
