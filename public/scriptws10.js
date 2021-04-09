@@ -1,7 +1,7 @@
-import Macros from '../models/Macros';
+/*import Macros from '../models/Macros'; */
 
 async function macromeals() {
-  const requestdata = await fetch('/api/wholeMeals');
+  const requestdata = await fetch('/api/wholeMeal');
   const macrodata = await requestdata.json();
   const arraydata = macrodata.data;
   console.log(arraydata);
@@ -14,7 +14,7 @@ async function macromeals() {
     const appendelement = document.createElement('tr');
     appendelement.innerHTML = `
           <td>${element.macro_id}</td>
-          <td>${element.meal_id}</td>
+          <td>${element.meal_name}</td>
           <td>${element.calories}</td>
           <td>${element.carbs}</td>
           <td>${element.sodium}</td>
@@ -41,7 +41,7 @@ function getrandommeals(data) {
   return random_meal;
 }
 
-/*
+
 
 async mealddataponts(macros){
 
@@ -108,7 +108,7 @@ async function dataMacros() {
     console.log(meal_data);
   };
 }
-*/
+
 async function windowActions() {
   console.log('loaded window');
   const data = await macromeals();

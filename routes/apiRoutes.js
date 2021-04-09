@@ -212,10 +212,10 @@ router.get('/restrictions/:restriction_id', async (req, res) => {
   }
 });
 
-router.get('/wholeMeals', async (req,res) => {
+router.get('/wholeMeal', async (req,res) => {
   try {
-    const meals = await db.meals.findAll();
-    const macros = await db.macros.findAll();
+    const meals = await db.Meals.findAll();
+    const macros = await db.Macros.findAll();
     const wholeMeals = meals.map((meal) => {
       const macroEntry = macros.find((macro) => macro.meal_id === meal.meal_id);
       console.log('meal', meal.dataValues);
@@ -225,7 +225,7 @@ router.get('/wholeMeals', async (req,res) => {
         ...macroEntry.dataValues
       };
     });
-    res.json({data:wholeMeals});
+    res.json({data: wholeMeals});
   } catch (err) {
     console.error(err);
     gi;
